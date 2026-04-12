@@ -1,9 +1,9 @@
 import Navbar         from "@/components/Navbar"
 import Hero           from "@/components/Hero"
 import BentoGrid      from "@/components/BentoGrid"
-import StatsSection   from "@/components/StatsSection"
 import ProcessSection from "@/components/ProcessSection"
 import FounderSection from "@/components/FounderSection"
+import NicheSection   from "@/components/NicheSection"
 import ContactForm    from "@/components/ContactForm"
 import FAQ            from "@/components/FAQ"
 import Footer         from "@/components/Footer"
@@ -18,8 +18,8 @@ export default function Page() {
         {/* ── Scrolling ticker ─── */}
         <Ticker />
 
-        <StatsSection />
         <BentoGrid />
+        <NicheSection />
         <ProcessSection />
         <FounderSection />
         <FAQ />
@@ -32,15 +32,17 @@ export default function Page() {
 
 /* ── Ticker (pure server component, no JS) ────────────────── */
 const TICKER_ITEMS = [
-  "Automatisation CRM",
-  "Agents Vocaux IA",
+  "Gestion NCR Automatisée",
+  "Documentation AS9100",
+  "Rappels Patients SMS",
+  "Zéro No-Show Cliniques",
+  "Instructions de Travail Auto.",
+  "Conformité Qualité IA",
   "Facturation Automatisée",
+  "Rapports Techniques Auto.",
   "Rappels SMS & Email",
-  "Qualification de Leads",
-  "Synchronisation d'Outils",
-  "Reporting Automatique",
-  "Chatbots 24/7",
-  "Intégration API",
+  "Subventions ESSOR 50%",
+  "Intégration Enovia · CATIA",
   "Planification Intelligente",
 ]
 

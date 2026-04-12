@@ -50,7 +50,7 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         icon: <CircleDollarSign size={15} className="shrink-0" style={{ color: "#00F0FF" }} />,
         q: "Quel est le coût d'implémentation ?",
-        a: "Nos projets se situent généralement entre 1 000 $ et 10 000 $ selon la complexité et le nombre de workflows à déployer. Un simple Quick Win (automatisation d'email, synchronisation CRM) démarre à partir de 1 000 $. Un système complet multi-outils avec agents vocaux se situe davantage entre 5 000 $ et 10 000 $. Chaque devis est établi après votre audit gratuit — vous savez exactement ce que vous payez avant de vous engager.",
+        a: "Le coût dépend de la complexité du système et de l'envergure des processus à automatiser. Il se situe généralement entre 2 500 $ et 50 000 $ — un Quick Win ciblé se positionne dans le bas de la fourchette, un écosystème complet multi-flux en haut. Bonne nouvelle : une grande partie de ces dépenses peut être subventionnée via des programmes gouvernementaux comme ESSOR, ce qui réduit significativement votre investissement réel. Le montant exact est établi après votre audit gratuit — vous savez exactement ce que vous payez avant de vous engager.",
       },
       {
         icon: <CircleDollarSign size={15} className="shrink-0" style={{ color: "#00F0FF" }} />,

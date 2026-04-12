@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Bot, Workflow, Link2, BarChart2, Database, MonitorSmartphone } from "lucide-react"
+import { Bot, Workflow, Link2, BarChart2, Database, MonitorSmartphone, FileText } from "lucide-react"
 import { fadeInUp, stagger, hoverLift, inViewOptions } from "@/lib/animations"
 
 const CARDS = [
@@ -60,6 +60,17 @@ const CARDS = [
     tags: ["Base de données", "Synchronisation", "Source unique"],
     accent: false,
     bigNum: "05",
+  },
+  {
+    id: "docs",
+    span: "lg:col-span-12",
+    icon: FileText,
+    title: "Gestion de la Documentation — Pour Tous les Secteurs",
+    description:
+      "Instructions de travail, procédures, manuels, rapports de conformité — générés, versionnés et distribués automatiquement. Que vous soyez dans le manufacturier, la santé ou les services, la documentation prend trop de temps. Nous l'automatisons.",
+    tags: ["Instructions de travail", "Rapports auto.", "Versioning", "Procédures", "Conformité documentaire", "Distribution intelligente"],
+    accent: false,
+    bigNum: "07",
   },
   {
     id: "reporting",

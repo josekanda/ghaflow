@@ -6,7 +6,7 @@ import { ArrowRight, Play, CheckCircle2, Zap, BarChart3 } from "lucide-react"
 import { fadeInUp, stagger } from "@/lib/animations"
 
 /* ── Floating mockup data ──────────────────────────────────── */
-const WORKFLOW_STEPS = ["Lead capturé", "Qualifié par IA", "CRM mis à jour", "Email envoyé", "Rappel planifié"]
+const WORKFLOW_STEPS = ["Non-conformité détectée", "Analyse IA", "NCR générée", "Responsable notifié", "Clôture tracée"]
 const ACTIVE_STEP = 2
 
 export default function Hero() {
@@ -57,7 +57,7 @@ export default function Hero() {
             <motion.div variants={fadeInUp} className="mb-7">
               <span className="tag-badge">
                 <span className="tag-badge-dot" />
-                Automatisation IA sur-mesure
+                Aérospatial · Manufacturier · Automobile · Industriel — IA sur-mesure
               </span>
             </motion.div>
 
@@ -67,23 +67,24 @@ export default function Hero() {
               className="font-black tracking-tight leading-[1.0] mb-6"
               style={{ fontSize: "clamp(2.6rem, 6.5vw, 5rem)", letterSpacing: "-0.045em" }}
             >
-              L'intelligence<br />
-              <span className="text-accent">qui libère<br />votre temps</span>
+              L'expertise terrain,<br />
+              <span className="text-accent">augmentée<br />par l'IA</span>
             </motion.h1>
 
             {/* Sub */}
             <motion.p
               variants={fadeInUp}
-              className="text-[#A1A1AA] text-lg leading-[1.7] mb-10 max-w-[480px]"
+              className="text-[#A1A1AA] text-lg leading-[1.7] mb-6 max-w-[480px]"
             >
-              Gagnez 3 à 5 heures par jour en automatisant vos tâches répétitives.
-              Des systèmes IA conçus pour votre métier — pas pour un cas d'usage générique.
+              Concepteur mécanique et agent des méthodes dans l'aéronautique depuis 15 ans. J'automatise les processus
+              qualité et documentation des PME manufacturières — parce que je vis ces problèmes
+              tous les jours.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 mb-14">
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 mb-4">
               <a href="#audit" className="btn-glow">
-                Réserver mon Audit Express
+                Réserver mon Audit Gratuit
                 <ArrowRight size={16} />
               </a>
               <a href="#solutions" className="btn-ghost group">
@@ -97,6 +98,18 @@ export default function Hero() {
               </a>
             </motion.div>
 
+            {/* ESSOR notice */}
+            <motion.div
+              variants={fadeInUp}
+              className="flex items-center gap-2 text-xs mb-10"
+              style={{ color: "#52525B" }}
+            >
+              <span className="text-green-400 font-bold">✓</span>
+              Subventions ESSOR disponibles — jusqu'à{" "}
+              <span className="text-green-400 font-semibold">50% du coût</span>{" "}
+              couvert par le gouvernement
+            </motion.div>
+
             {/* Stat strip */}
             <motion.div
               variants={fadeInUp}
@@ -104,9 +117,9 @@ export default function Hero() {
               style={{ borderTop: "0.5px solid rgba(255,255,255,0.08)" }}
             >
               {[
-                { value: "25h",  label: "sauvées / semaine"    },
-                { value: "−50%", label: "temps de traitement"  },
-                { value: "72h",  label: "premier Quick Win"    },
+                { value: "15 ans", label: "expertise aéronautique"   },
+                { value: "72h",    label: "premier résultat garanti" },
+                { value: "50%",    label: "financement ESSOR"        },
               ].map(({ value, label }) => (
                 <div key={label}>
                   <div
@@ -184,8 +197,8 @@ function MockupDashboard() {
         <div className="p-4 space-y-3">
           {/* Stat row */}
           <div className="grid grid-cols-2 gap-3">
-            <StatCard icon={<Zap size={12} />} label="Tâches auto." value="1 247" delta="+23%" />
-            <StatCard icon={<BarChart3 size={12} />} label="Heures sauvées" value="312h" delta="ce mois" />
+            <StatCard icon={<Zap size={12} />} label="Processus qualité" value="NCR" delta="automatisées" />
+            <StatCard icon={<BarChart3 size={12} />} label="Docs générées" value="auto." delta="conformes" />
           </div>
 
           {/* Workflow pipeline */}
@@ -246,11 +259,11 @@ function MockupDashboard() {
           boxShadow: "0 0 20px rgba(0,240,255,0.15)",
         }}
       >
-        <div className="text-[11px] font-semibold text-[#00F0FF]">✓ Lead qualifié</div>
+        <div className="text-[11px] font-semibold text-[#00F0FF]">✓ NCR clôturée auto.</div>
         <div className="text-[10px] text-[#52525B]">il y a 2 secondes</div>
       </motion.div>
 
-      {/* Floating email badge — bottom left */}
+      {/* Floating doc badge — bottom left */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8, x: -10 }}
         animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -261,7 +274,7 @@ function MockupDashboard() {
           border: "0.5px solid rgba(255,255,255,0.08)",
         }}
       >
-        <div className="text-[11px] text-[#A1A1AA]">📧 Email envoyé auto.</div>
+        <div className="text-[11px] text-[#A1A1AA]">📄 Rapport AS9100 généré</div>
         <div
           className="mt-1.5 h-0.5 w-16 rounded-full"
           style={{ background: "#00F0FF", boxShadow: "0 0 8px #00F0FF" }}
