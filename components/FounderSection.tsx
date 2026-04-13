@@ -30,7 +30,7 @@ export default function FounderSection() {
               className="text-[12px] font-semibold tracking-[0.1em] uppercase mb-7"
               style={{ color: "#00F0FF" }}
             >
-              Fondateur · Ghaflow
+              Concepteur mécanique & Agent des méthodes · Aéronautique &nbsp;|&nbsp; Fondateur · Ghaflow
             </motion.div>
 
             {/* Quote */}
@@ -40,25 +40,43 @@ export default function FounderSection() {
               style={{ letterSpacing: "-0.02em" }}
             >
               <span className="text-[#00F0FF]">"</span>
-              Des automatisations utiles,<br />pas de la complexité pour la complexité
+              Je n'explique pas vos problèmes de qualité.<br />
+              Je les vis chaque jour — et je les automatise.
               <span className="text-[#00F0FF]">"</span>
             </motion.blockquote>
 
             {/* Bio */}
             <motion.p
               variants={fadeInUp}
-              className="text-[#71717A] text-[15px] leading-[1.75] mb-8"
+              className="text-[#71717A] text-[15px] leading-[1.75] mb-6"
             >
-              Un professionnel de l'aéronautique, passionné par l'IA. Après des années dans
-              l'industrie aéronautique — chez{" "}
-              <span className="text-[#A1A1AA] font-semibold">Bombardier</span> et{" "}
-              <span className="text-[#A1A1AA] font-semibold">Safran Landing Systems Canada</span>{" "}
-              — j'ai vu de près ce que les processus manuels coûtent réellement aux organisations.
+              <span className="text-[#A1A1AA] font-semibold">Concepteur mécanique et agent des méthodes dans l'aéronautique depuis 15 ans.</span>
+              Mon quotidien : rédiger des instructions de travail,
+              résoudre des non-conformités, coordonner des changements d'ingénierie, naviguer dans
+              Enovia et CATIA.
               <br /><br />
-              Formé en IA et automatisation, j'ai créé Ghaflow pour une raison simple : les
-              entreprises québécoises méritent les mêmes outils d'efficacité que les grandes
-              corporations — à leur échelle et à leur budget.
+              C'est cette expertise terrain — que{" "}
+              <span className="text-[#A1A1AA] font-semibold">personne ne peut copier sans 15 ans d'expérience</span>{" "}
+              — que j'apporte dans chaque projet Ghaflow.
+              J'automatise ce que les autres agences ne peuvent même pas expliquer.
             </motion.p>
+
+            {/* Expertise badges */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 mb-8">
+              {["NCR / Non-conformités", "AS9100", "Documentation technique", "Enovia · CATIA", "Qualité & Logistique"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[11px] font-medium px-3 py-1 rounded-full"
+                  style={{
+                    background: "rgba(0,240,255,0.07)",
+                    border: "0.5px solid rgba(0,240,255,0.2)",
+                    color: "#00F0FF",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
 
             {/* CTA */}
             <motion.div variants={fadeInUp}>
