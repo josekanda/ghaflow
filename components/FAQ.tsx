@@ -27,10 +27,6 @@ const FAQ_GROUPS: FaqGroup[] = [
         a: "Non — c'est exactement l'inverse. L'IA est le levier qui permet aux petites structures de rivaliser avec les géants en automatisant 80% des tâches répétitives, sans embaucher. Les grandes entreprises ont des équipes entières pour ça. Ghaflow vous donne le même avantage, à votre échelle et à votre budget.",
       },
       {
-        q: "Combien de temps faut-il pour voir un retour sur investissement (ROI) ?",
-        a: "Nos clients récupèrent généralement entre 15 et 30 heures par semaine dès le premier mois suivant l'implémentation complète. Les premiers Quick Wins sont souvent visibles en 72h. Le ROI n'est pas théorique — il se mesure en heures récupérées dès la semaine 1.",
-      },
-      {
         q: "Mes données sont-elles en sécurité avec ces automatisations ?",
         a: "La sécurité est notre priorité non-négociable. Nous utilisons des protocoles de chiffrement (OAuth2, TLS) et des environnements isolés pour garantir que vos données restent privées. Elles ne transitent jamais vers des modèles publics et ne servent jamais à entraîner quoi que ce soit. Vos données restent dans vos outils — on se contente de les faire circuler de façon sécurisée.",
       },

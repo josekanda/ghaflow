@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { fadeInUp, stagger, inViewOptions } from "@/lib/animations"
-import { Plane, Stethoscope, CheckCircle2, ArrowRight } from "lucide-react"
+import { Plane, CheckCircle2, ArrowRight } from "lucide-react"
 
 /* ── Manufacturier / Aéro ────────────────────────────────────── */
 const SECTORS = [
@@ -23,14 +23,6 @@ const MANUFACTURING_SOLUTIONS = [
   "Automatisation des CAPA (Corrective and Preventive Actions)",
   "Suivi des certifications fournisseurs",
   "Reporting OEE / production automatisé",
-]
-
-/* ── Cliniques Dentaires ─────────────────────────────────────── */
-const DENTAL_SOLUTIONS = [
-  "Rappels SMS + Email automatiques (J−2, J−1, H−2)",
-  "Confirmation de rendez-vous par SMS en 1 tap",
-  "Remplacement automatique des créneaux annulés",
-  "Onboarding patient digitalisé (formulaires auto.)",
 ]
 
 export default function NicheSection() {
@@ -156,62 +148,6 @@ export default function NicheSection() {
             </div>
           </motion.div>
 
-          {/* ── Card 2 : Cliniques Dentaires ───────────────────── */}
-          <motion.div
-            variants={fadeInUp}
-            className="relative rounded-2xl overflow-hidden"
-            style={{
-              background: "rgba(255,255,255,0.025)",
-              border: "0.5px solid rgba(255,255,255,0.07)",
-            }}
-          >
-            <div className="relative z-10 p-8 md:p-10">
-              {/* Icon + titre */}
-              <div className="flex items-start gap-4 mb-4">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.1)" }}
-                >
-                  <Stethoscope size={22} className="text-[#A1A1AA]" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-black tracking-tight">Cliniques Dentaires</h3>
-                  <p className="text-sm font-semibold mt-0.5 text-[#A1A1AA]">
-                    15–20 % de no-shows. C'est 150 000 $/an qui s'évaporent.
-                  </p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-[14px] text-[#71717A] leading-[1.7] mb-8 max-w-2xl">
-                Chaque rendez-vous manqué est une perte sèche. Nos systèmes IA automatisent
-                les rappels, confirmations et listes d'attente — vous remplissez vos créneaux
-                sans lever le petit doigt.
-              </p>
-
-              {/* Solutions grid */}
-              <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                {DENTAL_SOLUTIONS.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-2.5 rounded-xl px-4 py-3"
-                    style={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "0.5px solid rgba(255,255,255,0.07)",
-                    }}
-                  >
-                    <CheckCircle2 size={13} className="text-green-400 mt-0.5 shrink-0" />
-                    <span className="text-[12px] text-[#A1A1AA] leading-snug">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <a href="#audit" className="btn-ghost inline-flex">
-                Calculer mes pertes de no-shows
-                <ArrowRight size={14} />
-              </a>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

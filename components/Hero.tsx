@@ -55,10 +55,20 @@ export default function Hero() {
           >
             {/* Eyebrow tag */}
             <motion.div variants={fadeInUp} className="mb-7">
-              <span className="tag-badge">
-                <span className="tag-badge-dot" />
-                Aérospatial · Manufacturier · Automobile · Industriel — IA sur-mesure
-              </span>
+              <div
+                className="inline-flex flex-col items-center px-6 py-3 rounded-[2rem] text-center"
+                style={{
+                  background: "rgba(0,240,255,0.06)",
+                  border: "0.5px solid rgba(0,240,255,0.35)",
+                }}
+              >
+                <span className="text-[11px] font-bold tracking-[0.12em] uppercase" style={{ color: "#00F0FF" }}>
+                  AÉROSPATIAL&nbsp;|&nbsp;AUTOMOBILE&nbsp;|&nbsp;INDUSTRIE 4.0&nbsp;|&nbsp;SOLUTIONS CORPORATIVES
+                </span>
+                <span className="text-[11px] font-bold tracking-[0.12em] uppercase mt-0.5" style={{ color: "#00F0FF" }}>
+                  IA SUR MESURE
+                </span>
+              </div>
             </motion.div>
 
             {/* Headline */}
@@ -76,9 +86,10 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-[#A1A1AA] text-lg leading-[1.7] mb-6 max-w-[480px]"
             >
-              Concepteur mécanique et agent des méthodes dans l'aéronautique depuis 15 ans. J'automatise les processus
-              qualité et documentation des PME manufacturières — parce que je vis ces problèmes
-              tous les jours.
+              Expertises <strong>Industrie 4.0</strong> et <strong>Solutions Corporatives</strong> fondées sur
+              15 ans d'expérience terrain en aérospatial. Je déploie des systèmes d'<strong>IA sur-mesure</strong> pour
+              automatiser la qualité et la documentation —{" "}
+              <em>car je résous ces problèmes au quotidien.</em>
             </motion.p>
 
             {/* CTAs */}
