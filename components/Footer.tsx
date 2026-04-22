@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Logo + tagline */}
           <div className="flex flex-col gap-2">
-            <GhaflowLogo />
+            <GhaflowLogo size={32} variant="color" />
             <p className="text-[11px] text-[#3f3f46]">
               Automatisation intelligente pour PME
             </p>
