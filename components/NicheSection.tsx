@@ -3,26 +3,82 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { fadeInUp, stagger, inViewOptions } from "@/lib/animations"
-import { Plane, CheckCircle2, ArrowRight } from "lucide-react"
+import { Coffee, Heart, Home, ShoppingBag, Briefcase, Wrench, CheckCircle2, ArrowRight } from "lucide-react"
 
-/* ── Manufacturier / Aéro ────────────────────────────────────── */
 const SECTORS = [
-  "Aérospatial & Défense",
-  "Fabrication Mécanique",
-  "Automobile & Sous-traitants",
-  "Équipements Industriels",
-]
-
-const MANUFACTURING_SOLUTIONS = [
-  "Gestion des Non-Conformités (NCR)",
-  "Génération automatique d'instructions de travail",
-  "Assistant de préparation d'audit AS9100 / ISO 9001",
-  "Automatisation des demandes de devis (RFQ) entrants",
-  "Suivi automatisé des FAI (First Article Inspection)",
-  "Chatbot interne « expert »",
-  "Automatisation des CAPA (Corrective and Preventive Actions)",
-  "Suivi des certifications fournisseurs",
-  "Reporting OEE / production automatisé",
+  {
+    Icon: Coffee,
+    name: "Restauration & Hôtellerie",
+    hook: "Réservations, inventaire, fidélité — encore tout en manuel ?",
+    desc: "Automatisez vos flux opérationnels pour vous concentrer sur l'expérience client. Zéro double saisie, zéro perte.",
+    solutions: [
+      "Gestion automatisée des réservations",
+      "Suivi inventaire & réapprovisionnement",
+      "Programme fidélité client automatisé",
+      "Rapports de performance quotidiens",
+    ],
+  },
+  {
+    Icon: Heart,
+    name: "Cliniques Dentaires & Médicales",
+    hook: "15–20 % de no-shows. C'est 150 000 $/an qui s'évaporent.",
+    desc: "Chaque rendez-vous manqué est une perte sèche. Nos systèmes IA automatisent les rappels, confirmations et listes d'attente — vous remplissez vos créneaux sans lever le petit doigt.",
+    solutions: [
+      "Rappels SMS + Email (J-2, J-1, H-2)",
+      "Confirmation de rendez-vous en 1 tap",
+      "Remplacement auto. des créneaux annulés",
+      "Onboarding patient digitalisé",
+    ],
+    cta: "Calculer mes pertes de no-shows",
+  },
+  {
+    Icon: Home,
+    name: "Immobilier",
+    hook: "Des leads qui s'évaporent faute de suivi rapide ?",
+    desc: "Qualifiez vos prospects automatiquement, gérez vos baux et relancez au bon moment — sans rien oublier.",
+    solutions: [
+      "Qualification automatique des leads",
+      "Gestion des baux & renouvellements",
+      "CRM automatisé avec relances intelligentes",
+      "Rapports de portefeuille en temps réel",
+    ],
+  },
+  {
+    Icon: ShoppingBag,
+    name: "E-commerce & Retail",
+    hook: "Vos clients attendent des réponses, pas des tickets.",
+    desc: "Automatisez commandes, support client et logistique pour scaler sans embaucher.",
+    solutions: [
+      "Traitement & suivi commandes automatisé",
+      "Support client IA 24/7",
+      "Alertes de réapprovisionnement auto.",
+      "Relances panier abandonné intelligentes",
+    ],
+  },
+  {
+    Icon: Briefcase,
+    name: "Services Professionnels",
+    hook: "Comptables, avocats, notaires — noyés dans l'admin ?",
+    desc: "Récupérez 10–15h par semaine en automatisant l'onboarding clients, les relances et la documentation répétitive.",
+    solutions: [
+      "Onboarding client digitalisé & auto.",
+      "Facturation & relances automatiques",
+      "Gestion des rappels & échéances",
+      "Génération automatique de documents",
+    ],
+  },
+  {
+    Icon: Wrench,
+    name: "Construction Résidentielle",
+    hook: "Chantiers en retard, sous-traitants difficiles à coordonner ?",
+    desc: "Suivez l'avancement de vos projets en temps réel et coordonnez vos équipes sans effort.",
+    solutions: [
+      "Suivi avancement chantiers en temps réel",
+      "Coordination & alertes sous-traitants",
+      "Gestion des documents & approbations",
+      "Rapports de chantier automatisés",
+    ],
+  },
 ]
 
 export default function NicheSection() {
@@ -53,101 +109,87 @@ export default function NicheSection() {
             </span>
           </motion.div>
           <motion.h2 variants={fadeInUp} className="section-heading mb-4">
-            Un avantage que personne<br />
-            <span className="text-accent">ne peut copier</span>
+            Votre secteur,<br />
+            <span className="text-accent">notre expertise</span>
           </motion.h2>
           <motion.p variants={fadeInUp} className="section-sub mx-auto text-center">
-            Deux secteurs, une même logique : l'expertise terrain d'abord, l'IA ensuite.
+            Une même logique dans chaque secteur : l'expertise terrain d'abord, l'IA ensuite.
           </motion.p>
         </motion.div>
 
-        {/* Cards — stacked (1 colonne) */}
+        {/* Cards grid */}
         <motion.div
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col gap-6"
+          className="grid md:grid-cols-2 gap-6"
         >
-          {/* ── Card 1 : Manufacturier / Aéro ──────────────────── */}
-          <motion.div
-            variants={fadeInUp}
-            className="relative rounded-2xl overflow-hidden"
-            style={{
-              background: "rgba(0,240,255,0.04)",
-              border: "0.5px solid rgba(0,240,255,0.2)",
-            }}
-          >
-            {/* Glow orb */}
-            <div
-              className="absolute -top-24 -right-24 w-72 h-72 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(0,240,255,0.10) 0%, transparent 70%)" }}
-            />
+          {SECTORS.map(({ Icon, name, hook, desc, solutions, cta }) => (
+            <motion.div
+              key={name}
+              variants={fadeInUp}
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                background: "rgba(0,240,255,0.04)",
+                border: "0.5px solid rgba(0,240,255,0.2)",
+              }}
+            >
+              {/* Glow orb */}
+              <div
+                className="absolute -top-20 -right-20 w-56 h-56 rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%)" }}
+              />
 
-            <div className="relative z-10 p-8 md:p-10">
-              {/* Icon + titre */}
-              <div className="flex items-start gap-4 mb-4">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(0,240,255,0.12)", border: "0.5px solid rgba(0,240,255,0.3)" }}
-                >
-                  <Plane size={22} className="text-[#00F0FF]" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-black tracking-tight">PME Manufacturières & Aéronautiques</h3>
-                  <p className="text-sm font-semibold mt-0.5" style={{ color: "#00F0FF" }}>
-                    Vous connaissez AS9100 ? Nous aussi — de l'intérieur.
-                  </p>
-                </div>
-              </div>
-
-              {/* Sectors badges */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {SECTORS.map((s) => (
-                  <span
-                    key={s}
-                    className="text-[11px] font-medium px-3 py-1 rounded-full"
-                    style={{
-                      background: "rgba(0,240,255,0.08)",
-                      border: "0.5px solid rgba(0,240,255,0.22)",
-                      color: "#00F0FF",
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-
-              {/* Description */}
-              <p className="text-[14px] text-[#71717A] leading-[1.7] mb-8 max-w-2xl">
-                15 ans dans l'industrie aéronautique et manufacturière. Je ne « comprends » pas vos
-                processus qualité — je les vis chaque jour. C'est pourquoi j'automatise ce qu'aucune
-                autre agence ne peut même expliquer.
-              </p>
-
-              {/* Solutions grid */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-                {MANUFACTURING_SOLUTIONS.map((item) => (
+              <div className="relative z-10 p-6 md:p-8">
+                {/* Icon + title */}
+                <div className="flex items-start gap-4 mb-3">
                   <div
-                    key={item}
-                    className="flex items-start gap-2.5 rounded-xl px-4 py-3"
-                    style={{
-                      background: "rgba(0,240,255,0.05)",
-                      border: "0.5px solid rgba(0,240,255,0.12)",
-                    }}
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "rgba(0,240,255,0.12)", border: "0.5px solid rgba(0,240,255,0.3)" }}
                   >
-                    <CheckCircle2 size={13} className="text-[#00F0FF] mt-0.5 shrink-0" />
-                    <span className="text-[12px] text-[#A1A1AA] leading-snug">{item}</span>
+                    <Icon size={20} className="text-[#00F0FF]" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="text-lg font-black tracking-tight">{name}</h3>
+                    <p className="text-[12px] font-semibold mt-0.5" style={{ color: "#00F0FF" }}>
+                      {hook}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-[13px] text-[#71717A] leading-[1.7] mb-5">
+                  {desc}
+                </p>
+
+                {/* Solutions grid */}
+                <div className="grid grid-cols-2 gap-2 mb-5">
+                  {solutions.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-2 rounded-xl px-3 py-2.5"
+                      style={{
+                        background: "rgba(0,240,255,0.05)",
+                        border: "0.5px solid rgba(0,240,255,0.12)",
+                      }}
+                    >
+                      <CheckCircle2 size={12} className="text-[#00F0FF] mt-0.5 shrink-0" />
+                      <span className="text-[11px] text-[#A1A1AA] leading-snug">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="#audit"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#00F0FF] hover:gap-2.5 transition-all duration-200"
+                >
+                  {cta ?? "Automatiser mon secteur"}
+                  <ArrowRight size={13} />
+                </a>
               </div>
-
-              <a href="#audit" className="btn-glow inline-flex">
-                Parler à un expert terrain
-                <ArrowRight size={14} />
-              </a>
-            </div>
-          </motion.div>
-
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

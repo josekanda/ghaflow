@@ -32,8 +32,8 @@ export default function Page() {
 
 /* ── Ticker (pure server component, no JS) ────────────────── */
 const TICKER_ITEMS = [
-  "Gestion NCR Automatisée",
-  "Documentation AS9100",
+  "Automatisation CRM",
+  "Documentation Qualité Auto.",
   "Rappels Patients SMS",
   "Zéro No-Show Cliniques",
   "Instructions de Travail Auto.",
@@ -42,7 +42,7 @@ const TICKER_ITEMS = [
   "Rapports Techniques Auto.",
   "Rappels SMS & Email",
   "Subventions ESSOR 50%",
-  "Intégration Enovia · CATIA",
+  "Gestion des Leads Auto.",
   "Planification Intelligente",
 ]
 

@@ -30,40 +30,35 @@ export default function FounderSection() {
               className="text-[12px] font-semibold tracking-[0.1em] uppercase mb-7"
               style={{ color: "#00F0FF" }}
             >
-              Concepteur mécanique & Agent des méthodes · Aéronautique &nbsp;|&nbsp; Fondateur · Ghaflow
+              Expert en automatisation de processus &nbsp;|&nbsp; Fondateur · Ghaflow
             </motion.div>
 
-            {/* Quote */}
-            <motion.blockquote
-              variants={fadeInUp}
-              className="text-xl md:text-2xl font-bold tracking-tight leading-[1.35] mb-6"
-              style={{ letterSpacing: "-0.02em" }}
-            >
-              <span className="text-[#00F0FF]">"</span>
-              Je n'explique pas vos problèmes de qualité.<br />
-              Je les vis chaque jour — et je les automatise.
-              <span className="text-[#00F0FF]">"</span>
-            </motion.blockquote>
 
-            {/* Bio */}
-            <motion.p
-              variants={fadeInUp}
-              className="text-[#71717A] text-[15px] leading-[1.75] mb-6"
-            >
-              <span className="text-[#A1A1AA] font-semibold">Concepteur mécanique et agent des méthodes dans l'aéronautique depuis 15 ans.</span>
-              Mon quotidien : rédiger des instructions de travail,
-              résoudre des non-conformités, coordonner des changements d'ingénierie, naviguer dans
-              Enovia et CATIA.
-              <br /><br />
-              C'est cette expertise terrain — que{" "}
-              <span className="text-[#A1A1AA] font-semibold">personne ne peut copier sans 15 ans d'expérience</span>{" "}
-              — que j'apporte dans chaque projet Ghaflow.
-              J'automatise ce que les autres agences ne peuvent même pas expliquer.
-            </motion.p>
+{/* Bio */}
+            <motion.div variants={fadeInUp} className="text-[#71717A] text-[15px] leading-[1.75] mb-6">
+              <p className="text-[#A1A1AA] font-bold text-[16px] mb-4">
+                Fondateur de Ghaflow – Expert en automatisation de processus IA
+              </p>
+              <p className="mb-4">
+                Je ne vends pas de technologie, je résous des problèmes opérationnels que j'ai vécus
+                moi-même sur le terrain. Ancien opérateur en fabrication, j'ai passé des années au
+                cœur de processus manuels, de tâches répétitives et de pertes de temps qu'on tolère
+                {" "}«&nbsp;parce qu'on a toujours fait comme ça&nbsp;».
+              </p>
+              <p>
+                Avec Ghaflow, je m'appuie sur cette expérience terrain pour concevoir des systèmes
+                d'automatisation vraiment alignés sur la réalité des équipes. Je pars de vos
+                opérations, pas des outils. Aujourd'hui, je combine expertise opérationnelle et
+                maîtrise d'outils IA comme{" "}
+                <span className="text-[#A1A1AA] font-semibold">n8n, agents IA, RAG et computer vision</span>{" "}
+                pour mettre en place des workflows fiables, prêts à l'emploi et intégrés à vos
+                systèmes existants.
+              </p>
+            </motion.div>
 
             {/* Expertise badges */}
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 mb-8">
-              {["NCR / Non-conformités", "AS9100", "Documentation technique", "Enovia · CATIA", "Qualité & Logistique"].map((tag) => (
+              {["Automatisation IA", "Processus industriels", "Documentation technique", "Qualité & Logistique", "Optimisation des flux"].map((tag) => (
                 <span
                   key={tag}
                   className="text-[11px] font-medium px-3 py-1 rounded-full"

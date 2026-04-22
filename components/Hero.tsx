@@ -6,7 +6,7 @@ import { ArrowRight, Play, CheckCircle2, Zap, BarChart3 } from "lucide-react"
 import { fadeInUp, stagger } from "@/lib/animations"
 
 /* ── Floating mockup data ──────────────────────────────────── */
-const WORKFLOW_STEPS = ["Non-conformité détectée", "Analyse IA", "NCR générée", "Responsable notifié", "Clôture tracée"]
+const WORKFLOW_STEPS = ["Requête reçue", "Analyse IA", "Action automatisée", "Notification envoyée", "Dossier clôturé"]
 const ACTIVE_STEP = 2
 
 export default function Hero() {
@@ -63,7 +63,7 @@ export default function Hero() {
                 }}
               >
                 <span className="text-[11px] font-bold tracking-[0.12em] uppercase" style={{ color: "#00F0FF" }}>
-                  AÉROSPATIAL&nbsp;|&nbsp;AUTOMOBILE&nbsp;|&nbsp;INDUSTRIE 4.0&nbsp;|&nbsp;SOLUTIONS CORPORATIVES
+                  INDUSTRIE 4.0&nbsp;|&nbsp;SOLUTIONS CORPORATIVES&nbsp;|&nbsp;PME &amp; ENTREPRISES
                 </span>
                 <span className="text-[11px] font-bold tracking-[0.12em] uppercase mt-0.5" style={{ color: "#00F0FF" }}>
                   IA SUR MESURE
@@ -86,9 +86,9 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-[#A1A1AA] text-lg leading-[1.7] mb-6 max-w-[480px]"
             >
-              Expertises <strong>Industrie 4.0</strong> et <strong>Solutions Corporatives</strong> fondées sur
-              15 ans d'expérience terrain en aérospatial. Je déploie des systèmes d'<strong>IA sur-mesure</strong> pour
-              automatiser la qualité et la documentation —{" "}
+              Expertise <strong>Industrie 4.0</strong> et <strong>Solutions Corporatives</strong> fondée sur
+              15 ans d'expérience terrain. Je déploie des systèmes d'<strong>IA sur-mesure</strong> pour
+              automatiser vos processus et votre documentation —{" "}
               <em>car je résous ces problèmes au quotidien.</em>
             </motion.p>
 
@@ -128,7 +128,7 @@ export default function Hero() {
               style={{ borderTop: "0.5px solid rgba(255,255,255,0.08)" }}
             >
               {[
-                { value: "15 ans", label: "expertise aéronautique"   },
+                { value: "15 ans", label: "expertise terrain"          },
                 { value: "72h",    label: "premier résultat garanti" },
                 { value: "50%",    label: "financement ESSOR"        },
               ].map(({ value, label }) => (
@@ -208,7 +208,7 @@ function MockupDashboard() {
         <div className="p-4 space-y-3">
           {/* Stat row */}
           <div className="grid grid-cols-2 gap-3">
-            <StatCard icon={<Zap size={12} />} label="Processus qualité" value="NCR" delta="automatisées" />
+            <StatCard icon={<Zap size={12} />} label="Flux traités" value="auto." delta="en continu" />
             <StatCard icon={<BarChart3 size={12} />} label="Docs générées" value="auto." delta="conformes" />
           </div>
 
@@ -270,7 +270,7 @@ function MockupDashboard() {
           boxShadow: "0 0 20px rgba(0,240,255,0.15)",
         }}
       >
-        <div className="text-[11px] font-semibold text-[#00F0FF]">✓ NCR clôturée auto.</div>
+        <div className="text-[11px] font-semibold text-[#00F0FF]">✓ Tâche clôturée auto.</div>
         <div className="text-[10px] text-[#52525B]">il y a 2 secondes</div>
       </motion.div>
 
@@ -285,7 +285,7 @@ function MockupDashboard() {
           border: "0.5px solid rgba(255,255,255,0.08)",
         }}
       >
-        <div className="text-[11px] text-[#A1A1AA]">📄 Rapport AS9100 généré</div>
+        <div className="text-[11px] text-[#A1A1AA]">📄 Rapport auto. généré</div>
         <div
           className="mt-1.5 h-0.5 w-16 rounded-full"
           style={{ background: "#00F0FF", boxShadow: "0 0 8px #00F0FF" }}
