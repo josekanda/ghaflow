@@ -32,18 +32,28 @@ export default function GhaflowLogo({
       className={cn("inline-flex items-center select-none", className)}
       aria-label="Ghaflow — Accueil"
     >
-      <Image
-        src="/logo-ghaflow.png"
-        alt="Ghaflow"
-        width={1376}
-        height={768}
-        priority
+      <div
         style={{
-          height:    displayH,
-          width:     displayW,
-          objectFit: "contain",
+          height:       displayH,
+          width:        displayW,
+          borderRadius: 10,
+          overflow:     "hidden",
         }}
-      />
+      >
+        <Image
+          src="/logo-ghaflow.png"
+          alt="Ghaflow"
+          width={1376}
+          height={768}
+          priority
+          style={{
+            height:    displayH,
+            width:     displayW,
+            objectFit: "contain",
+            display:   "block",
+          }}
+        />
+      </div>
     </a>
   )
 }
