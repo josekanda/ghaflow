@@ -3,13 +3,13 @@
 import { cn } from "@/lib/utils"
 
 /* ─────────────────────────────────────────────────────────────
-   GhaflowLogo — SVG gear system, fully static coordinates
-   (no Math.cos/sin at render → no hydration mismatch)
+   GhaflowLogo — Two interlocked chain-link ovals + upward arrow
+   forming a stylised G mark.
 
    Props:
-     size      → height in px
+     size      → icon height in px
      variant   → "color" | "mono" | "white"
-     animated  → slow gear rotation (default true)
+     animated  → subtle float animation (default true)
      className
    ──────────────────────────────────────────────────────────── */
 
@@ -20,49 +20,6 @@ interface LogoProps {
   className?: string
 }
 
-/* ── Pre-computed tooth endpoints ─────────────────────────────
-   Large gear  (r_inner=11, r_outer=16, 8 teeth, every 45°)
-   Small gear  (r_inner=7,  r_outer=11, 6 teeth, every 60°)
-   All values rounded to 2 decimal places — stable SSR/CSR.
-   ──────────────────────────────────────────────────────────── */
-
-// Large gear teeth — 8 teeth at 0°,45°,90°,135°,180°,225°,270°,315°
-const LG_TEETH: [number,number,number,number][] = [
-  [ 11.00,  0.00,  16.00,  0.00],
-  [  7.78,  7.78,  11.31, 11.31],
-  [  0.00, 11.00,  0.00,  16.00],
-  [ -7.78,  7.78, -11.31, 11.31],
-  [-11.00,  0.00, -16.00,  0.00],
-  [ -7.78, -7.78, -11.31,-11.31],
-  [  0.00,-11.00,  0.00, -16.00],
-  [  7.78, -7.78,  11.31,-11.31],
-]
-
-// Large gear spokes — 4 spokes at 22.5°,112.5°,202.5°,292.5° (between teeth)
-const LG_SPOKES: [number,number,number,number][] = [
-  [ 3.83,  1.59,  8.12,  3.36],
-  [-1.59,  3.83, -3.36,  8.12],
-  [-3.83, -1.59, -8.12, -3.36],
-  [ 1.59, -3.83,  3.36, -8.12],
-]
-
-// Small gear teeth — 6 teeth at 0°,60°,120°,180°,240°,300°
-const SM_TEETH: [number,number,number,number][] = [
-  [ 7.00,  0.00, 11.00,  0.00],
-  [ 3.50,  6.06,  5.50,  9.53],
-  [-3.50,  6.06, -5.50,  9.53],
-  [-7.00,  0.00,-11.00,  0.00],
-  [-3.50, -6.06, -5.50, -9.53],
-  [ 3.50, -6.06,  5.50, -9.53],
-]
-
-// Small gear spokes — 3 spokes at 30°,150°,270°
-const SM_SPOKES: [number,number,number,number][] = [
-  [ 2.17,  1.25,  4.33,  2.50],
-  [-2.17,  1.25, -4.33,  2.50],
-  [ 0.00, -2.50,  0.00, -5.00],
-]
-
 export default function GhaflowLogo({
   size      = 40,
   variant   = "color",
@@ -70,98 +27,106 @@ export default function GhaflowLogo({
   className,
 }: LogoProps) {
 
-  const C = variant === "color"
-    ? { large: "#00F0FF", small: "#FFFFFF", hub: "#050505", hubRing: "#00F0FF", text: "#FFFFFF", accent: "#00F0FF" }
-    : variant === "mono"
-    ? { large: "#4B5563", small: "#6B7280", hub: "#050505", hubRing: "#6B7280", text: "#9CA3AF", accent: "#9CA3AF" }
-    : { large: "#FFFFFF", small: "#FFFFFF", hub: "#050505", hubRing: "#FFFFFF", text: "#FFFFFF", accent: "#FFFFFF" }
+  const isColor = variant === "color"
+  const isMono  = variant === "mono"
 
-  const spinCW  = animated ? "gf-cw  12s linear infinite" : "none"
-  const spinCCW = animated ? "gf-ccw  8s linear infinite" : "none"
+  /* Palette per variant */
+  const blue    = isColor ? "#2563EB" : isMono ? "#4B5563" : "#FFFFFF"
+  const green   = isColor ? "#10B981" : isMono ? "#6B7280" : "#FFFFFF"
+  const txtCol  = "#FFFFFF"
+  const accCol  = isColor ? "#00F0FF" : isMono ? "#9CA3AF" : "#FFFFFF"
 
-  // SVG canvas: 110 × 44, large gear at (22,22), small at (76,22)
-  const svgW = size * 2.6
-  const svgH = size
+  /* Unique IDs per variant to avoid SVG filter conflicts (header vs footer) */
+  const gid = `gfg-${variant}`
+  const fid = `gff-${variant}`
 
   return (
     <a
       href="#"
-      className={cn("inline-flex items-center gap-3 select-none", className)}
+      className={cn("inline-flex items-center gap-2.5 select-none", className)}
       aria-label="Ghaflow — Accueil"
     >
-      {/* ── Mark ─────────────────────────────────────── */}
+      {/* ── Icon mark ───────────────────────────────────── */}
       <svg
-        width={svgW}
-        height={svgH}
-        viewBox="0 0 110 44"
+        width={size}
+        height={size}
+        viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
+        style={animated ? { animation: "gfloat 3s ease-in-out infinite" } : undefined}
       >
         <defs>
-          <filter id="gf-gl" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="3" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          {/* Blue → green diagonal gradient */}
+          <linearGradient id={gid} x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%"   stopColor={blue}  />
+            <stop offset="100%" stopColor={green} />
+          </linearGradient>
+
+          {/* Glow filter */}
+          <filter id={fid} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.8" result="b"/>
+            <feMerge>
+              <feMergeNode in="b"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
-          <filter id="gf-gs" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
+
+          <style>{`
+            @keyframes gfloat {
+              0%, 100% { transform: translateY(0px); }
+              50%       { transform: translateY(-1.5px); }
+            }
+          `}</style>
         </defs>
 
-        {/* ── Large gear — cx=22, cy=22 ─────────────── */}
-        <g
-          transform="translate(22,22)"
-          style={{ animation: spinCW, transformOrigin: "0px 0px" }}
-          filter="url(#gf-gl)"
-        >
-          {LG_TEETH.map(([x1,y1,x2,y2], i) => (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke={C.large} strokeWidth="3.5" strokeLinecap="round"/>
-          ))}
-          <circle r="12" stroke={C.large} strokeWidth="1.5" fill="none"/>
-          <circle r="7"  stroke={C.large} strokeWidth="0.8" fill="none" opacity="0.4"/>
-          {LG_SPOKES.map(([x1,y1,x2,y2], i) => (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke={C.large} strokeWidth="1.2" opacity="0.55"/>
-          ))}
-          <circle r="3.5" fill={C.hub} stroke={C.hubRing} strokeWidth="1.2"/>
-          <circle r="1.2" fill={C.hubRing}/>
+        {/* ── Link 2 — lower-right chain link (behind Link 1) ──── */}
+        <g transform="translate(26,27) rotate(-15)">
+          {/* Draw full oval */}
+          <rect x="-11" y="-5.5" width="22" height="11" rx="5.5"
+            stroke={`url(#${gid})`} strokeWidth="2.2" fill="none"/>
+          {/* Paint over the left (overlapping) half in page-bg colour
+              so it appears to go behind Link 1 */}
+          <rect x="-14" y="-8" width="15" height="16" fill="#060606"/>
         </g>
 
-        {/* ── Small gear — cx=76, cy=22 ─────────────── */}
-        <g
-          transform="translate(76,22)"
-          style={{ animation: spinCCW, transformOrigin: "0px 0px" }}
-          filter="url(#gf-gs)"
-        >
-          {SM_TEETH.map(([x1,y1,x2,y2], i) => (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke={C.small} strokeWidth="2.8" strokeLinecap="round"/>
-          ))}
-          <circle r="8"  stroke={C.small} strokeWidth="1.2" fill="none"/>
-          <circle r="4.5" stroke={C.small} strokeWidth="0.7" fill="none" opacity="0.35"/>
-          {SM_SPOKES.map(([x1,y1,x2,y2], i) => (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke={C.small} strokeWidth="1" opacity="0.5"/>
-          ))}
-          <circle r="2.5" fill={C.hub} stroke={C.hubRing} strokeWidth="1"/>
-          <circle r="0.9" fill={C.hubRing}/>
+        {/* Re-draw only the visible right arc of Link 2 with glow */}
+        <g transform="translate(26,27) rotate(-15)" filter={`url(#${fid})`}>
+          {/* right cap + right half of top/bottom edges */}
+          <path
+            d="M0,-5.5 L5.5,-5.5 A5.5,5.5 0 0,1 5.5,5.5 L0,5.5"
+            stroke={`url(#${gid})`} strokeWidth="2.2"
+            fill="none" strokeLinecap="round"
+          />
         </g>
 
-        {/* Keyframes — inlined to avoid external CSS dependency */}
-        <style>{`
-          @keyframes gf-cw  { to { transform: rotate(360deg);  } }
-          @keyframes gf-ccw { to { transform: rotate(-360deg); } }
-        `}</style>
+        {/* ── Link 1 — upper-left chain link (in front) ────────── */}
+        <g transform="translate(14,19) rotate(-15)" filter={`url(#${fid})`}>
+          <rect x="-11" y="-5.5" width="22" height="11" rx="5.5"
+            stroke={`url(#${gid})`} strokeWidth="2.4" fill="none"/>
+        </g>
+
+        {/* ── Upward arrow (emerges from top of Link 1) ────────── */}
+        <g filter={`url(#${fid})`}>
+          <line
+            x1="14" y1="4" x2="14" y2="12"
+            stroke={`url(#${gid})`} strokeWidth="1.8" strokeLinecap="round"
+          />
+          <polyline
+            points="10.5,8 14,4 17.5,8"
+            stroke={`url(#${gid})`} strokeWidth="1.8"
+            strokeLinecap="round" strokeLinejoin="round"
+            fill="none"
+          />
+        </g>
       </svg>
 
-      {/* ── Wordmark ─────────────────────────────────── */}
+      {/* ── Wordmark ─────────────────────────────────────────── */}
       <span
-        className="font-black leading-none tracking-[-0.045em]"
-        style={{ fontSize: size * 0.52, color: C.text }}
+        className="font-black tracking-[-0.04em] leading-none"
+        style={{ fontSize: size * 0.52, color: txtCol }}
       >
-        Gha<span style={{ color: C.accent }}>flow</span>
+        Gha<span style={{ color: accCol }}>flow</span>
       </span>
     </a>
   )
