@@ -3,18 +3,17 @@
 import { cn } from "@/lib/utils"
 
 /* ─────────────────────────────────────────────────────────────
-   GhaflowLogo — two interlocked FILLED chain-link rings.
+   GhaflowLogo — two interlocked chain-link rings (stroke-based)
 
-   Each ring is a "donut" shape (outer rounded-rect minus inner
-   hole), both at -12° tilt, overlapping ~36%.
-
-   Interlocking : 3-pass clip technique
-     Pass 1  Link 1 LOWER half (y > 24) → behind Link 2
-     Pass 2  Link 2 FULL                → in front (lower zone)
-     Pass 3  Link 1 UPPER half (y < 24) → in front (upper zone)
-
-   Gradient : blue #1055CC → cyan #00BFFF → teal #00D4A8
-   3-D look  : highlight arc on lit edge + shadow arc on dark edge
+   Shape   : thick stroked rounded-rect rings, rx=7, no fill
+   Gradient: cyan #00D4FF → teal #00C9A7 → deep-blue #0077B6
+             applied as a single userSpaceOnUse linear gradient
+             so colour flows consistently across both rings
+   Interlock: 3-pass clipPath technique
+     Pass 1  Link 1 RIGHT half (x > 32) → behind Link 2
+     Pass 2  Link 2 FULL                → in front (overlap zone)
+     Pass 3  Link 1 LEFT half  (x < 32) → in front of Link 2
+   Glow    : subtle feGaussianBlur behind SourceGraphic
    ──────────────────────────────────────────────────────────── */
 
 interface LogoProps {
@@ -25,101 +24,100 @@ interface LogoProps {
 }
 
 export default function GhaflowLogo({
-  size      = 36,
+  size      = 60,
   variant   = "color",
-  animated  = true,
+  animated  = false,
   className,
 }: LogoProps) {
 
   const isColor = variant === "color"
   const isMono  = variant === "mono"
 
-  const blue  = isColor ? "#1055CC" : isMono ? "#374151" : "#FFFFFF"
-  const mid   = isColor ? "#00BFFF" : isMono ? "#6B7280" : "#CCCCCC"
-  const teal  = isColor ? "#00D4A8" : isMono ? "#9CA3AF" : "#FFFFFF"
-  const white = "#FFFFFF"
-  const acc   = isColor ? "#00F0FF" : isMono ? "#9CA3AF" : "#FFFFFF"
+  /* Gradient stops — match site accent palette */
+  const c1 = isColor ? "#00D4FF" : isMono ? "#9CA3AF" : "#FFFFFF"
+  const c2 = isColor ? "#00C9A7" : isMono ? "#6B7280" : "#CCCCCC"
+  const c3 = isColor ? "#0077B6" : isMono ? "#374151" : "#AAAAAA"
 
-  /* Unique SVG IDs per variant (avoid header/footer conflict) */
-  const gid = `lg-g-${variant}`
-  const fid = `lg-f-${variant}`
-  const ct  = `lg-ct-${variant}`
-  const cb  = `lg-cb-${variant}`
+  /* Wordmark colours */
+  const textMain   = variant === "white" ? "#FFFFFF" : "#FFFFFF"
+  const textAccent = isColor ? "#00B4FF" : isMono ? "#9CA3AF" : "#FFFFFF"
+
+  /* Unique defs IDs (header + footer render concurrently) */
+  const u = variant
+  const gid = `lg-g-${u}`
+  const fid = `lg-f-${u}`
+  const clL = `lg-cl-${u}`
+  const clR = `lg-cr-${u}`
 
   /*
-    Ring path (centered at origin, applied via transform="translate/rotate"):
-      Outer rounded-rect : ±11 × ±14, corner r=7   → 22 × 28
-      Inner hole         : ±5  × ±8,  corner r=3   → 10 × 16
-      fill-rule="evenodd" punches the hole through the fill.
+    Internal canvas: 64 × 52 viewBox
+    Link 1 center : (22, 26)   Link 2 center : (42, 26)
+    Ring path     : rect centered at origin, ±10 × ±14, rx=7
+    Stroke-width  : 6.5 px  → visual half-extent ≈ 13.25 h, 17.25 v
+    Clip midpoint : x = 32  (midpoint between the two centers)
+    Overlap zone  : ≈ 6.5 px of stroke overlap creates the interlock
   */
-  const ring =
-    /* outer */
-    "M-4,-14 H4 A7,7 0 0,1 11,-7 V7 A7,7 0 0,1 4,14 H-4 A7,7 0 0,1 -11,7 V-7 A7,7 0 0,1 -4,-14 Z " +
-    /* inner hole */
-    "M-2,-8 H2 A3,3 0 0,1 5,-5 V5 A3,3 0 0,1 2,8 H-2 A3,3 0 0,1 -5,5 V-5 A3,3 0 0,1 -2,-8 Z"
 
-  /* Highlight arc — top + top-right corner of outer ring (lit side) */
-  const hlTop  = "M-4,-14 H4 A7,7 0 0,1 11,-7"
-  /* Shadow arc  — bottom + bottom-left corner of outer ring (dark side) */
-  const shBot  = "M4,14 H-4 A7,7 0 0,1 -11,7"
-
-  const fs = Math.round(size * 0.60)
-
-  /* One reusable ring element */
-  const Ring = ({ glow }: { glow: boolean }) => (
-    <g filter={glow ? `url(#${fid})` : undefined}>
-      {/* filled donut */}
-      <path d={ring} fill={`url(#${gid})`} fillRule="evenodd"/>
-      {/* lit-edge highlight */}
-      <path d={hlTop} stroke="rgba(180,245,255,0.60)" strokeWidth="1.4"
-            fill="none" strokeLinecap="round"/>
-      {/* shadow-edge darkening */}
-      <path d={shBot} stroke="rgba(0,20,60,0.35)" strokeWidth="1.4"
-            fill="none" strokeLinecap="round"/>
-    </g>
+  /* Shared ring path (rect, no fill, stroked) */
+  const RingRect = () => (
+    <rect
+      x="-10" y="-14" width="20" height="28" rx="7"
+      fill="none"
+      stroke={`url(#${gid})`}
+      strokeWidth="6.5"
+      strokeLinejoin="round"
+    />
   )
+
+  const VW = 64
+  const VH = 52
+  const iconW = size
+  const iconH = Math.round(size * VH / VW)
+  const fs    = Math.round(size * 0.40)
+  const gap   = Math.round(size * 0.16)
 
   return (
     <a
       href="#"
-      className={cn("inline-flex items-center gap-2.5 select-none", className)}
+      className={cn("inline-flex items-center select-none", className)}
+      style={{ gap }}
       aria-label="Ghaflow — Accueil"
     >
-      {/* ── Icon — 48 × 48 internal canvas ──────────────── */}
+      {/* ── Icon SVG ──────────────────────────────────────── */}
       <svg
-        width={size}
-        height={size}
-        viewBox="0 0 48 48"
+        width={iconW}
+        height={iconH}
+        viewBox={`0 0 ${VW} ${VH}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         style={animated ? { animation: "lgfloat 3s ease-in-out infinite" } : undefined}
       >
         <defs>
-          {/* Blue → cyan → teal diagonal gradient */}
-          <linearGradient id={gid} x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%"   stopColor={blue}/>
-            <stop offset="55%"  stopColor={mid}/>
-            <stop offset="100%" stopColor={teal}/>
+          {/* Single gradient flows across both rings L→R top→bottom */}
+          <linearGradient id={gid} x1="6" y1="8" x2="58" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor={c1}/>
+            <stop offset="50%"  stopColor={c2}/>
+            <stop offset="100%" stopColor={c3}/>
           </linearGradient>
 
-          {/* Soft glow */}
-          <filter id={fid} x="-45%" y="-45%" width="190%" height="190%">
-            <feGaussianBlur stdDeviation="1.6" result="b"/>
+          {/* Soft glow behind the stroke */}
+          <filter id={fid} x="-55%" y="-55%" width="210%" height="210%">
+            <feGaussianBlur stdDeviation="1.8" result="blur"/>
             <feMerge>
-              <feMergeNode in="b"/>
+              <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
 
-          {/* Clip — upper canvas half  (Link 1 upper → IN FRONT of Link 2) */}
-          <clipPath id={ct}>
-            <rect x="0" y="0"  width="48" height="24"/>
+          {/* Left clip  — Link 1 left half stays IN FRONT */}
+          <clipPath id={clL}>
+            <rect x="0"  y="0" width="32"       height={VH}/>
           </clipPath>
 
-          {/* Clip — lower canvas half  (Link 1 lower → BEHIND Link 2) */}
-          <clipPath id={cb}>
-            <rect x="0" y="24" width="48" height="24"/>
+          {/* Right clip — Link 1 right half goes BEHIND Link 2 */}
+          <clipPath id={clR}>
+            <rect x="32" y="0" width={VW - 32}  height={VH}/>
           </clipPath>
 
           <style>{`
@@ -130,34 +128,38 @@ export default function GhaflowLogo({
           `}</style>
         </defs>
 
-        {/* ── PASS 1 — Link 1 lower half  (behind Link 2) ─── */}
-        <g clipPath={`url(#${cb})`}>
-          <g transform="translate(15,24) rotate(-12)">
-            <Ring glow={false}/>
+        {/* ── PASS 1 — Link 1 RIGHT half (behind Link 2) ──── */}
+        <g clipPath={`url(#${clR})`}>
+          <g transform="translate(22,26) rotate(-10)">
+            <RingRect/>
           </g>
         </g>
 
-        {/* ── PASS 2 — Link 2 full  (in front in lower zone) ─ */}
-        <g>
-          <g transform="translate(29,24) rotate(-12)">
-            <Ring glow={true}/>
-          </g>
+        {/* ── PASS 2 — Link 2 FULL (in front in overlap zone) */}
+        <g transform="translate(42,26) rotate(-10)" filter={`url(#${fid})`}>
+          <RingRect/>
         </g>
 
-        {/* ── PASS 3 — Link 1 upper half  (in front of Link 2) */}
-        <g clipPath={`url(#${ct})`}>
-          <g transform="translate(15,24) rotate(-12)">
-            <Ring glow={true}/>
+        {/* ── PASS 3 — Link 1 LEFT half (in front of Link 2) */}
+        <g clipPath={`url(#${clL})`}>
+          <g transform="translate(22,26) rotate(-10)" filter={`url(#${fid})`}>
+            <RingRect/>
           </g>
         </g>
       </svg>
 
       {/* ── Wordmark ──────────────────────────────────────── */}
       <span
-        className="font-black leading-none"
-        style={{ fontSize: fs, letterSpacing: "-0.03em", color: white }}
+        style={{
+          fontFamily: "var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif)",
+          fontSize: fs,
+          fontWeight: 800,
+          letterSpacing: "-0.03em",
+          lineHeight: 1,
+          color: textMain,
+        }}
       >
-        Gha<span style={{ color: acc }}>flow</span>
+        Gha<span style={{ color: textAccent }}>flow</span>
       </span>
     </a>
   )
