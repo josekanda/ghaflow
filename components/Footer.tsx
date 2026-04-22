@@ -43,24 +43,8 @@ export default function Footer() {
 
           {/* Logo + tagline */}
           <div className="flex flex-col gap-2">
-            {/*
-              Footer logo: mono variant with cyan glow on hover.
-              Slightly larger than header (size=52), gears animated slowly.
-            */}
-            <div className="group/footerlogo">
-              <GhaflowLogo
-                size={72}
-                variant="mono"
-                animated={true}
-                className="transition-all duration-500 group-hover/footerlogo:opacity-100 opacity-60"
-              />
-              {/* Cyan glow line under logo on hover */}
-              <div
-                className="mt-1.5 h-px w-0 group-hover/footerlogo:w-full transition-all duration-500 rounded-full"
-                style={{ background: "linear-gradient(90deg, #00F0FF, transparent)" }}
-              />
-            </div>
-            <p className="text-[11px] text-[#3f3f46] pl-0.5">
+            <GhaflowLogo />
+            <p className="text-[11px] text-[#3f3f46]">
               Automatisation intelligente pour PME
             </p>
           </div>
