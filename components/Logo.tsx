@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
    GhaflowLogo — two interlocked chain-link rings (stroke-based)
 
    Shape   : thick stroked rounded-rect rings, rx=7, no fill
-   Gradient: cyan #00D4FF → teal #00C9A7 → deep-blue #0077B6
+   Gradient: blue #2B6CB0 → turquoise #14B8A6 → deep-blue #2563EB
              applied as a single userSpaceOnUse linear gradient
              so colour flows consistently across both rings
    Interlock: 3-pass clipPath technique
@@ -33,14 +33,14 @@ export default function GhaflowLogo({
   const isColor = variant === "color"
   const isMono  = variant === "mono"
 
-  /* Gradient stops — match site accent palette */
-  const c1 = isColor ? "#00D4FF" : isMono ? "#9CA3AF" : "#FFFFFF"
-  const c2 = isColor ? "#00C9A7" : isMono ? "#6B7280" : "#CCCCCC"
-  const c3 = isColor ? "#0077B6" : isMono ? "#374151" : "#AAAAAA"
+  /* Gradient stops — blue → turquoise → deep-blue */
+  const c1 = isColor ? "#2B6CB0" : isMono ? "#9CA3AF" : "#FFFFFF"
+  const c2 = isColor ? "#14B8A6" : isMono ? "#6B7280" : "#CCCCCC"
+  const c3 = isColor ? "#2563EB" : isMono ? "#374151" : "#AAAAAA"
 
   /* Wordmark colours */
-  const textMain   = variant === "white" ? "#FFFFFF" : "#FFFFFF"
-  const textAccent = isColor ? "#00B4FF" : isMono ? "#9CA3AF" : "#FFFFFF"
+  const textMain   = isColor ? "#2563EB" : variant === "white" ? "#FFFFFF" : "#FFFFFF"
+  const textAccent = isColor ? "#2563EB" : isMono ? "#9CA3AF" : "#FFFFFF"
 
   /* Unique defs IDs (header + footer render concurrently) */
   const u = variant
