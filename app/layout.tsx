@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     title: "Ghaflow — Automatisation Intelligente",
   },
   robots: { index: true, follow: true },
+  icons: {
+    shortcut: "/logo-icon.png",
+    apple: "/logo-icon.png",
+  },
 }
 
 export const viewport: Viewport = {
