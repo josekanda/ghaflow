@@ -49,9 +49,7 @@ export default function FounderSection() {
                 Avec Ghaflow, je m'appuie sur cette expérience terrain pour concevoir des systèmes
                 d'automatisation vraiment alignés sur la réalité des équipes. Je pars de vos
                 opérations, pas des outils. Aujourd'hui, je combine expertise opérationnelle et
-                maîtrise d'outils IA comme{" "}
-                <span className="text-[#A1A1AA] font-semibold">n8n, agents IA, RAG et computer vision</span>{" "}
-                pour mettre en place des workflows fiables, prêts à l'emploi et intégrés à vos
+                maîtrise d'outils IA pour mettre en place des workflows fiables, prêts à l'emploi et intégrés à vos
                 systèmes existants.
               </p>
             </motion.div>
