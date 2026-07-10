@@ -4,11 +4,11 @@ import { ArrowRight } from "lucide-react"
 import GhaflowLogo from "@/components/Logo"
 
 const NAV_LINKS = [
-  { label: "Impact",    href: "#impact"      },
   { label: "Solutions", href: "#solutions"   },
   { label: "Méthode",  href: "#methodology" },
   { label: "L'Expert",  href: "#expert"      },
   { label: "FAQ",       href: "#faq"         },
+  { label: "Contact",   href: "#audit"       },
 ]
 
 export default function Footer() {
@@ -77,9 +77,14 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-[11px] text-[#3f3f46]">
-            © {new Date().getFullYear()} Ghaflow. Tous droits réservés.
-          </p>
+          <div className="text-[11px] text-[#3f3f46] space-y-0.5">
+            <p>© {new Date().getFullYear()} Ghaflow, une division de 9528-0459 Québec inc. Tous droits réservés.</p>
+            <p>
+              <a href="tel:+14502890459" className="hover:text-[#A1A1AA] transition-colors">450-289-0459</a>
+              {" · "}
+              <a href="mailto:contact@ghaflow.com" className="hover:text-[#A1A1AA] transition-colors">contact@ghaflow.com</a>
+            </p>
+          </div>
           <p
             className="text-[10px] tracking-[0.06em] uppercase"
             style={{ color: "rgba(255,255,255,0.1)" }}

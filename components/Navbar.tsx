@@ -6,11 +6,11 @@ import { Menu, X, ArrowRight } from "lucide-react"
 import GhaflowLogo from "@/components/Logo"
 
 const NAV_LINKS = [
-  { label: "Impact",    href: "#impact"      },
   { label: "Solutions", href: "#solutions"   },
   { label: "Méthode",  href: "#methodology" },
   { label: "L'Expert",  href: "#expert"      },
   { label: "FAQ",       href: "#faq"         },
+  { label: "Contact",   href: "#audit"       },
 ]
 
 export default function Navbar() {
