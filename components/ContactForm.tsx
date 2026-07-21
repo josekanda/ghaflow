@@ -22,6 +22,9 @@ const schema = z.object({
   teamSize: z
     .string()
     .min(1, { message: "Veuillez sélectionner une taille d'équipe" }),
+  revenue: z
+    .string()
+    .optional(),
   needs: z
     .string()
     .min(20, { message: "Décrivez vos besoins (min. 20 caractères)" }),
@@ -57,6 +60,7 @@ export default function ContactForm() {
           email:    data.email,
           company:  data.company ?? "",
           teamSize: data.teamSize,
+          revenue:  data.revenue ?? "",
           needs:    data.needs,
         }),
       }
@@ -147,20 +151,35 @@ export default function ContactForm() {
                 />
               </Field>
 
-              {/* Team size */}
-              <Field label="Taille de l'équipe" error={errors.teamSize?.message}>
-                <select
-                  {...register("teamSize")}
-                  className="input-base appearance-none cursor-pointer bg-[#0a0a0a]"
-                  defaultValue=""
-                >
-                  <option value="" disabled>Sélectionner...</option>
-                  <option value="1-5">1–5 personnes (Solo ou micro-équipe)</option>
-                  <option value="6-20">6–20 personnes (PME)</option>
-                  <option value="21-50">21–50 personnes</option>
-                  <option value="50+">50+ personnes</option>
-                </select>
-              </Field>
+              {/* Row: Team size + Revenue */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Field label="Taille de l'équipe" error={errors.teamSize?.message}>
+                  <select
+                    {...register("teamSize")}
+                    className="input-base appearance-none cursor-pointer bg-[#0a0a0a]"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>Sélectionner...</option>
+                    <option value="1-5">1–5 personnes (Solo ou micro-équipe)</option>
+                    <option value="6-20">6–20 personnes (PME)</option>
+                    <option value="21-50">21–50 personnes</option>
+                    <option value="50+">50+ personnes</option>
+                  </select>
+                </Field>
+                <Field label="Chiffre d'affaires annuel">
+                  <select
+                    {...register("revenue")}
+                    className="input-base appearance-none cursor-pointer bg-[#0a0a0a]"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>Sélectionner...</option>
+                    <option value="<100k">Moins de 100k€</option>
+                    <option value="100k-500k">100k€ – 500k€</option>
+                    <option value="500k-1M">500k€ – 1M€</option>
+                    <option value="1M+">1M€ et plus</option>
+                  </select>
+                </Field>
+              </div>
 
               {/* Needs */}
               <Field label="Vos principaux irritants & objectifs" error={errors.needs?.message}>
