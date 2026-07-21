@@ -109,18 +109,6 @@ export default function Hero() {
               </a>
             </motion.div>
 
-            {/* ESSOR notice */}
-            <motion.div
-              variants={fadeInUp}
-              className="flex items-center gap-2 text-xs mb-10"
-              style={{ color: "#52525B" }}
-            >
-              <span className="text-green-400 font-bold">✓</span>
-              Subventions ESSOR disponibles — jusqu'à{" "}
-              <span className="text-green-400 font-semibold">50% du coût</span>{" "}
-              couvert par le gouvernement
-            </motion.div>
-
             {/* Stat strip */}
             <motion.div
               variants={fadeInUp}
@@ -130,7 +118,6 @@ export default function Hero() {
               {[
                 { value: "15 ans", label: "expertise terrain"          },
                 { value: "72h",    label: "premier résultat garanti" },
-                { value: "50%",    label: "financement ESSOR"        },
               ].map(({ value, label }) => (
                 <div key={label}>
                   <div

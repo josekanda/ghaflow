@@ -41,7 +41,6 @@ const TICKER_ITEMS = [
   "Facturation Automatisée",
   "Rapports Techniques Auto.",
   "Rappels SMS & Email",
-  "Subventions ESSOR 50%",
   "Gestion des Leads Auto.",
   "Planification Intelligente",
 ]
